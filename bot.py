@@ -116,7 +116,7 @@ async def on_raw_reaction_add(payload):
         return
     
     #await user.send('{} has added {} to the the message {} {}'.format(user.name, reaction.emoji, reaction.message.content, queue))
-    if payload.channel == 668140694996779072:
+    if payload.channel_id == 668140694996779072:
         if (user in fights):
             print('Вы уже ищете боксфайт.')
             return
