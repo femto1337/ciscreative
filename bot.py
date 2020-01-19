@@ -100,7 +100,7 @@ async def on_raw_reaction_add(payload):
         try:
             await user.edit(nick='[0] ' + user.name)
         except:
-            print('sad')
+            print('cant change nick to [0]')
 
     if payload.user_id == 668040788482981899:
         return
