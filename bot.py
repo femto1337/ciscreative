@@ -6,6 +6,13 @@ import json
 queue = []
 fights = []
 
+#embed=discord.Embed(title="CIS Creative", description="Поиск боксфайта")
+#embed.set_thumbnail(url="https://media.discordapp.net/attachments/668037249056768020/668166034783600670/Logo_cis_customs.png?width=473&height=473")
+#embed.add_field(name="Хочешь боксфайт?", value="Нажми на ✋ снизу и бот найдет тебе соперника.", inline=False)
+#embed.add_field(name="Want a boxfight?", value="Click on the ✋ from the bottom and the bot will find you an opponent.", inline=False)
+
+
+
 TOKEN = 'NjY4MDQwNzg4NDgyOTgxODk5.XiNqiw.BESeRIDSoBLGnfC7mweW40R6Sg4'
 
 client = commands.Bot(command_prefix = '.')
@@ -89,7 +96,7 @@ async def on_raw_reaction_add(payload):
     guild = discord.utils.find(lambda g: g.id == payload.guild_id, client.guilds)
     user = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
     channel = discord.utils.find(lambda c: c.id == payload.channel_id, guild.channels)
-    if not user.name.startswith("["):
+    if not user.display_name.startswith("["):
         try:
             await user.edit(nick='[0] ' + user.name)
         except:
@@ -124,8 +131,16 @@ async def on_raw_reaction_add(payload):
             print(oponnent, user)
             boxchannel = await user.guild.create_text_channel('boxfight', overwrites=overwrites_admin, topic=str(payload.user_id) + ' p2 ' + str(oponnent.id))
             await oponnent.send('Вам нашли боксфайт.')
-            msg = await boxchannel.send('1v1 boxfight\nPlayer №1: ' + str(user.display_name) + '( '+ str(payload.user_id) +' )' '\nPlayer №2: ' + str(oponnent.display_name) + '('+ str(oponnent.id) +')')
-            await boxchannel.send('Соперник найден!/The opponent found!\mПравила/Rules:\nИграете до 5 на любой карте BOXFIGHT/Play up to 5 on any BOXFIGHTS map\nЕсли у вас проблемы или недоразумение отмечайте @BoxfightHelp\nХочешь boxfight?Нажми на эмоцию (ладошку) снизу и бот найдет тебе соперника.GLHF/Want a box fight?Click on the emotion (palm) from the bottom and the bot will find you an opponent.GLHF\n\nПосле каждой победы,кидайте скрин победы в чат/After each victory, throw the victory screen in the chat')
+            embedplayers=discord.Embed(title="CIS Creative", description="Боксфайт.")
+            embedplayers.set_thumbnail(url="https://media.discordapp.net/attachments/668037249056768020/668166034783600670/Logo_cis_customs.png?width=473&height=473")
+            embedplayers.add_field(name="Первый игрок (♥): ", value=user.display_name, inline=False)
+            embedplayers.add_field(name="Второй игрок (💩): ", value=oponnent.display_name, inline=False)
+            embedrules=discord.Embed(title="CIS Creative", description="Правила.")
+            embedrules.set_thumbnail(url="https://media.discordapp.net/attachments/668037249056768020/668166034783600670/Logo_cis_customs.png?width=473&height=473")
+            embedrules.add_field(name="Карта:", value="7620-0771-9529", inline=False)
+            embedrules.add_field(name="Играете до:", value="5 побед", inline=False)
+            msg = await boxchannel.send(embed=embedplayers)
+            await boxchannel.send(embed=embedrules)
             await msg.add_reaction('♥')
             await msg.add_reaction('💩')
             for reaction in messagefinder.reactions:
