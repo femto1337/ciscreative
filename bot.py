@@ -166,8 +166,6 @@ async def on_raw_reaction_add(payload):
             
             fights.append(user)
             fights.append(oponnent)
-
-
     if payload.emoji.name == '♥':
         p1 = discord.utils.find(lambda m: m.id == int(get_p1(channel.topic)), guild.members)
         p2 = discord.utils.find(lambda m: m.id == int(get_p2(channel.topic)), guild.members)
@@ -205,9 +203,8 @@ async def on_raw_reaction_add(payload):
         fights.remove(p1)
         fights.remove(p2)
         await channel.delete()
-
-        
     if payload.emoji.name == '💩':
+        print('emoji govno')
         p1 = discord.utils.find(lambda m: m.id == int(get_p1(channel.topic)), guild.members)
         p2 = discord.utils.find(lambda m: m.id == int(get_p2(channel.topic)), guild.members)
         message: discord.Message = await channel.fetch_message(payload.message_id)
