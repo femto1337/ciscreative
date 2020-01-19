@@ -204,14 +204,13 @@ async def on_raw_reaction_add(payload):
         fights.remove(p2)
         await channel.delete()
     if payload.emoji.name == '💩':
-        print('emoji govno')
         p1 = discord.utils.find(lambda m: m.id == int(get_p1(channel.topic)), guild.members)
         p2 = discord.utils.find(lambda m: m.id == int(get_p2(channel.topic)), guild.members)
         message: discord.Message = await channel.fetch_message(payload.message_id)
 
         #проверка на то что голос не один.
         for reaction in message.reactions:
-            if reaction.count <= 2 and reaction.emoji == '♥':
+            if reaction.count <= 2 and reaction.emoji == '💩':
                 return
         ##################################
 
