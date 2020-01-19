@@ -74,6 +74,11 @@ def get_p2(s):
 @client.event
 async def on_ready():
     print('Bot is ready.')
+    
+@client.command()
+async def close(ctx):
+    queue.remove(ctx.author)
+    ctx.author.send('Вы отменили поиск боксфайта.')
 
     
 @client.event
