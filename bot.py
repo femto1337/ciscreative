@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-import random
+from random import randint
 import json
 
 queue = []
@@ -110,7 +110,7 @@ async def on_raw_reaction_add(payload):
         try:
             await user.edit(nick='[0] ' + user.name)
         except:
-            print('sad')
+            print('cant add [0] to ' + user.name)
 
     if payload.user_id == 668040788482981899:
         return
@@ -118,7 +118,7 @@ async def on_raw_reaction_add(payload):
     #await user.send('{} has added {} to the the message {} {}'.format(user.name, reaction.emoji, reaction.message.content, queue))
     if payload.channel_id == 668140694996779072:
         if (user in fights) or (user in queue):
-            print('Вы уже ищете боксфайт.')
+            user.send('Вы уже ищете боксфайт.')
             return
         queue.append(user)
         if len(queue) >= 2:
@@ -127,9 +127,9 @@ async def on_raw_reaction_add(payload):
             queue.remove(user)
             oponnent = queue[random.randint(0,len(queue)) - 1]
             if user == oponnent:
-                print('error user==opponent')
+                print('error user==opponent ' + user + '==' + oponnent)
                 return
-            if user == client.user:
+            if (user == client.user) and (oponnent == client.user):
                 print('error user==bot')
                 return
             queue.remove(oponnent)
@@ -139,7 +139,7 @@ async def on_raw_reaction_add(payload):
             oponnent: discord.PermissionOverwrite(read_messages=True)
             }
             print(oponnent, user)
-            boxchannel = await user.guild.create_text_channel('boxfight', overwrites=overwrites_admin, topic=str(payload.user_id) + ' p2 ' + str(oponnent.id))
+            boxchannel = await user.guild.create_text_channel('boxfight-' + str(randint(1000, 10000)), overwrites=overwrites_admin, topic=str(payload.user_id) + ' p2 ' + str(oponnent.id))
             await oponnent.send('Вам нашли боксфайт.')
             embedplayers=discord.Embed(title="CIS Creative", description="Боксфайт.")
             embedplayers.set_thumbnail(url="https://media.discordapp.net/attachments/668037249056768020/668166034783600670/Logo_cis_customs.png?width=473&height=473")
