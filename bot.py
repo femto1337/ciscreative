@@ -74,16 +74,6 @@ def get_p2(s):
 @client.event
 async def on_ready():
     print('Bot is ready.')
-    
-@client.command()
-async def close(ctx):
-    if ctx.author in queue:
-        queue.remove(ctx.author)
-        await ctx.author.send('Вы отменили поиск боксфайта.')
-    else:
-        await ctx.author.send('Вы не искали боксфайт.')
-     
-    
 
     
 @client.event
@@ -100,10 +90,10 @@ async def on_raw_reaction_add(payload):
     if payload.user_id == 668040788482981899:
         return
     
-    queue.append(user)
     #await user.send('{} has added {} to the the message {} {}'.format(user.name, reaction.emoji, reaction.message.content, queue))
     if payload.message_id == 668355175458537472:
         print('реакция для начала игры была нажата')
+        queue.append(user)
         if (user in fights):
             print('Вы уже ищете боксфайт.')
             return
@@ -142,6 +132,7 @@ async def on_raw_reaction_add(payload):
         for reaction in message.reactions:
             if reaction.count <= 2 and reaction.emoji == '♥':
                 return
+        print(message.reactions)
         embed=discord.Embed(title="CIS Creative", description="Результаты боксфайта:")
         embed.set_thumbnail(url="https://media.discordapp.net/attachments/668037249056768020/668166034783600670/Logo_cis_customs.png?width=473&height=473")
         embed.add_field(name="Победитель:", value=p1.name + " (+10)", inline=False)
