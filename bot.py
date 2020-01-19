@@ -168,7 +168,10 @@ async def on_raw_reaction_add(payload):
         embed=discord.Embed(title="CIS Creative", description="Результаты боксфайта:")
         embed.set_thumbnail(url="https://media.discordapp.net/attachments/668037249056768020/668166034783600670/Logo_cis_customs.png?width=473&height=473")
         embed.add_field(name="Победитель:", value=p1.name + " (+10)", inline=False)
-        embed.add_field(name="Проигравший:", value=p2.name + " (-10)", inline=False)
+        try:
+            embed.add_field(name="Проигравший:", value=p2.name + " (-10)", inline=False)
+        except:
+            print('error with p2')
         await p2.send(embed=embed)
         await p1.send(embed=embed)
         
