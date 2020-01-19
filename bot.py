@@ -126,13 +126,13 @@ async def on_raw_reaction_add(payload):
             print('Нашли опонента. И создаем все остальное')
             oponnent = queue[random.randint(0,len(queue)) - 1]
             queue.remove(user)
-            queue.remove(oponnent)
             if user == oponnent:
                 print('error user==opponent')
                 return
             if user == client.user:
                 print('error user==bot')
                 return
+            queue.remove(oponnent)
             overwrites_admin = {
             user.guild.default_role: discord.PermissionOverwrite(read_messages=False),
             user: discord.PermissionOverwrite(read_messages=True),
