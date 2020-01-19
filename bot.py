@@ -132,7 +132,6 @@ async def on_raw_reaction_add(payload):
         for reaction in message.reactions:
             if reaction.count <= 2 and reaction.emoji == '♥':
                 return
-        print(message.reactions)
         embed=discord.Embed(title="CIS Creative", description="Результаты боксфайта:")
         embed.set_thumbnail(url="https://media.discordapp.net/attachments/668037249056768020/668166034783600670/Logo_cis_customs.png?width=473&height=473")
         embed.add_field(name="Победитель:", value=p1.name + " (+10)", inline=False)
