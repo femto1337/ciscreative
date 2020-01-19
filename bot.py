@@ -78,8 +78,6 @@ async def on_ready():
     
 @client.event
 async def on_raw_reaction_add(payload):
-    #print(payload)
-    #print(payload.message_id)
     guild = discord.utils.find(lambda g: g.id == payload.guild_id, client.guilds)
     user = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
     channel = discord.utils.find(lambda c: c.id == payload.channel_id, guild.channels)
@@ -88,8 +86,7 @@ async def on_raw_reaction_add(payload):
             await user.edit(nick='[0] ' + user.name)
         except:
             print('sad')
-        
-    #print(payload.emoji.name)
+
     if payload.user_id == 668040788482981899:
         return
     
@@ -123,11 +120,11 @@ async def on_raw_reaction_add(payload):
             await boxchannel.send('Соперник найден!/The opponent found!\mПравила/Rules:\nИграете до 5 на любой карте BOXFIGHT/Play up to 5 on any BOXFIGHTS map\nЕсли у вас проблемы или недоразумение отмечайте @BoxfightHelp\nХочешь boxfight?Нажми на эмоцию (ладошку) снизу и бот найдет тебе соперника.GLHF/Want a box fight?Click on the emotion (palm) from the bottom and the bot will find you an opponent.GLHF\n\nПосле каждой победы,кидайте скрин победы в чат/After each victory, throw the victory screen in the chat')
             await msg.add_reaction('♥')
             await msg.add_reaction('💩')
+            for reaction in messagefinder.reactions:
+                await reaction.remove(user)
             queue.remove(oponnent)
             fights.append(user)
             fights.append(oponnent)
-            for reaction in messagefinder.reactions:
-                await reaction.remove(user)
     if payload.emoji.name == '♥':
         p1 = discord.utils.find(lambda m: m.id == int(get_p1(channel.topic)), guild.members)
         p2 = discord.utils.find(lambda m: m.id == int(get_p2(channel.topic)), guild.members)
