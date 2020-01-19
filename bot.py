@@ -77,8 +77,13 @@ async def on_ready():
     
 @client.command()
 async def close(ctx):
-    queue.remove(ctx.author)
-    ctx.author.send('Вы отменили поиск боксфайта.')
+    if ctx.author in queue:
+        queue.remove(ctx.author)
+        await ctx.author.send('Вы отменили поиск боксфайта.')
+    else:
+        await ctx.author.send('Вы не искали боксфайт.')
+     
+    
 
     
 @client.event
