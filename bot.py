@@ -75,6 +75,14 @@ def get_p2(s):
 async def on_ready():
     print('Bot is ready.')
 
+@client.command()	
+async def close(ctx):	
+    if ctx.author in queue:	
+        queue.remove(ctx.author)	
+        await ctx.author.send('Вы отменили поиск боксфайта.')	
+    else:	
+        await ctx.author.send('Вы не искали боксфайт.')	
+
     
 @client.event
 async def on_raw_reaction_add(payload):
