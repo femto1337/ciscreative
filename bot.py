@@ -124,8 +124,8 @@ async def on_raw_reaction_add(payload):
         if len(queue) >= 2:
             messagefinder: discord.Message = await channel.fetch_message(payload.message_id)
             print('Нашли опонента. И создаем все остальное')
-            oponnent = queue[random.randint(0,len(queue)) - 1]
             queue.remove(user)
+            oponnent = queue[random.randint(0,len(queue)) - 1]
             if user == oponnent:
                 print('error user==opponent')
                 return
