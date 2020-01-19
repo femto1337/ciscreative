@@ -100,7 +100,7 @@ async def on_raw_reaction_add(payload):
         try:
             await user.edit(nick='[0] ' + user.name)
         except:
-            print('cant change nick to [0]')
+            print('sad')
 
     if payload.user_id == 668040788482981899:
         return
@@ -108,15 +108,14 @@ async def on_raw_reaction_add(payload):
     #await user.send('{} has added {} to the the message {} {}'.format(user.name, reaction.emoji, reaction.message.content, queue))
     if payload.message_id == 668355175458537472:
         if (user in fights):
+            print('Вы уже ищете боксфайт.')
             return
-        print('реакция для начала игры была нажата')
         queue.append(user)
-        if len(queue) <= 1:
-            print('1 человек или меньше в очереди в данный момент.')
-        elif len(queue) >= 2:
+        if len(queue) >= 2:
             messagefinder: discord.Message = await channel.fetch_message(payload.message_id)
             print('Нашли опонента. И создаем все остальное')
             queue.remove(user)
+            queue.remove(oponnent)
             oponnent = queue[random.randint(0,len(queue)) - 1]
             if user == oponnent:
                 return
@@ -137,15 +136,13 @@ async def on_raw_reaction_add(payload):
             embedrules=discord.Embed(title="CIS Creative", description="Правила.")
             embedrules.set_thumbnail(url="https://media.discordapp.net/attachments/668037249056768020/668166034783600670/Logo_cis_customs.png?width=473&height=473")
             embedrules.add_field(name="Карта:", value="7620-0771-9529", inline=False)
-            embedrules.add_field(name="Играете до:", value="5 побед", inline=False)
+            embedrules.add_field(name="Играете до:", value="3 побед", inline=False)
             msg = await boxchannel.send(embed=embedplayers)
             await boxchannel.send(embed=embedrules)
             await msg.add_reaction('♥')
             await msg.add_reaction('💩')
             for reaction in messagefinder.reactions:
                 await reaction.remove(user)
-                await reaction.remove(oponnent)
-            queue.remove(oponnent)
             fights.append(user)
             fights.append(oponnent)
     if payload.emoji.name == '♥':
@@ -155,7 +152,6 @@ async def on_raw_reaction_add(payload):
         for reaction in message.reactions:
             if reaction.count <= 2 and reaction.emoji == '♥':
                 return
-        print(message.reactions)
         embed=discord.Embed(title="CIS Creative", description="Результаты боксфайта:")
         embed.set_thumbnail(url="https://media.discordapp.net/attachments/668037249056768020/668166034783600670/Logo_cis_customs.png?width=473&height=473")
         embed.add_field(name="Победитель:", value=p1.name + " (+10)", inline=False)
@@ -168,7 +164,7 @@ async def on_raw_reaction_add(payload):
         except:
             print('cant change nick for p1')
         try:
-            await p2.edit(nick='['+ str(get_points(p2.display_name) - 10) +'] ' + p2.name)
+            await p2.edit(nick='['+ str(get_points(p1.display_name) - 10) +'] ' + p2.name)
         except:
             print('cant change nick for p2')
 
