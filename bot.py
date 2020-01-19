@@ -145,6 +145,7 @@ async def on_raw_reaction_add(payload):
             await msg.add_reaction('💩')
             for reaction in messagefinder.reactions:
                 await reaction.remove(user)
+                await reaction.remove(oponnent)
             queue.remove(oponnent)
             fights.append(user)
             fights.append(oponnent)
