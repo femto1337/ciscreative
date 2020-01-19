@@ -95,7 +95,7 @@ async def on_raw_reaction_add(payload):
     
     queue.append(user)
     #await user.send('{} has added {} to the the message {} {}'.format(user.name, reaction.emoji, reaction.message.content, queue))
-    if payload.message_id == 668209599459098665:
+    if payload.message_id == 668355175458537472:
         print('реакция для начала игры была нажата')
         if (user in fights):
             print('Вы уже ищете боксфайт.')
