@@ -6,6 +6,10 @@ import json
 queue = []
 fights = []
 
+#embed=discord.Embed(title="CIS Creative", description="Поиск боксфайта")
+#embed.set_thumbnail(url="https://media.discordapp.net/attachments/668037249056768020/668166034783600670/Logo_cis_customs.png?width=473&height=473")
+#embed.add_field(name="Хочешь боксфайт?", value="Нажми на ✋ снизу и бот найдет тебе соперника.", inline=False)
+#embed.add_field(name="Want a boxfight?", value="Click on the ✋ from the bottom and the bot will find you an opponent.", inline=False)
 
 
 
@@ -78,6 +82,16 @@ def get_p2(s):
 async def on_ready():
     print('Bot is ready.')
 
+@client.command()
+async def createnewmsg(ctx):
+    embed=discord.Embed(title="CIS Creative", description="Поиск боксфайта")
+    embed.set_thumbnail(url="https://media.discordapp.net/attachments/668037249056768020/668166034783600670/Logo_cis_customs.png?width=473&height=473")
+    embed.add_field(name="Хочешь боксфайт?", value="Нажми на ✋ снизу и бот найдет тебе соперника.", inline=False)
+    embed.add_field(name="Want a boxfight?", value="Click on the ✋ from the bottom and the bot will find you an opponent.", inline=False)
+    msg = await ctx.send(embed)
+    await msg.add_reaction('✋')
+
+
 @client.command()	
 async def close(ctx):	
     if ctx.author in queue:	
@@ -102,7 +116,7 @@ async def on_raw_reaction_add(payload):
         return
     
     #await user.send('{} has added {} to the the message {} {}'.format(user.name, reaction.emoji, reaction.message.content, queue))
-    if payload.message_id == 668355175458537472:
+    if payload.channel == 668140694996779072:
         if (user in fights):
             print('Вы уже ищете боксфайт.')
             return
@@ -110,14 +124,15 @@ async def on_raw_reaction_add(payload):
         if len(queue) >= 2:
             messagefinder: discord.Message = await channel.fetch_message(payload.message_id)
             print('Нашли опонента. И создаем все остальное')
-            oponnent = queue[random.randint(0,len(queue)) - 1]
-            if user == oponnent:
-                return
-            if user == client.user:
-                return
-
             queue.remove(user)
             queue.remove(oponnent)
+            oponnent = queue[random.randint(0,len(queue)) - 1]
+            if user == oponnent:
+                print('error user==opponent')
+                return
+            if user == client.user:
+                print('error user==bot')
+                return
             overwrites_admin = {
             user.guild.default_role: discord.PermissionOverwrite(read_messages=False),
             user: discord.PermissionOverwrite(read_messages=True),
