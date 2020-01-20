@@ -90,6 +90,13 @@ async def close(ctx):
         await ctx.author.send('Вы отменили поиск боксфайта.')	
     else:	
         await ctx.author.send('Вы не искали боксфайт.')
+        
+@client.command()	
+async def closefight(ctx, member: discord.Member):	
+    if member in queue:	
+        queue.remove(ctx.member)	
+    elsif member in fights:	
+        fights.remove(member)
 
 @client.event
 async def on_raw_reaction_remove(payload):
