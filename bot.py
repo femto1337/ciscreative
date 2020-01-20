@@ -99,7 +99,7 @@ async def on_raw_reaction_remove(payload):
     if payload.channel_id == 668140694996779072:
         print('reaction removed')
         queue.remove(user)
-        user.send('Вы отменили поиск.')
+        await user.send('Вы отменили поиск.')
 
 @client.event
 async def on_raw_reaction_add(payload):
