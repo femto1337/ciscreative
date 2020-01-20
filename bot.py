@@ -95,7 +95,7 @@ async def close(ctx):
 async def closefight(ctx, member: discord.Member):	
     if member in queue:	
         queue.remove(ctx.member)	
-    elsif member in fights:	
+    elif member in fights:	
         fights.remove(member)
 
 @client.event
