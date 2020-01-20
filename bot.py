@@ -91,7 +91,16 @@ async def close(ctx):
     else:	
         await ctx.author.send('Вы не искали боксфайт.')
 
-    
+@client.event
+async def on_raw_reaction_clear(payload):
+    guild = discord.utils.find(lambda g: g.id == payload.guild_id, client.guilds)
+    user = discord.utils.find(lambda m: m.id == payload.user_id, guild.members)
+    print('on_raw_reaction_clear')
+    if payload.channel_id == 668140694996779072:
+        print('reaction removed')
+        queue.remove(user)
+        user.send('Вы отменили поиск.')
+
 @client.event
 async def on_raw_reaction_add(payload):
     guild = discord.utils.find(lambda g: g.id == payload.guild_id, client.guilds)
