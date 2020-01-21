@@ -193,41 +193,28 @@ async def on_raw_reaction_add(payload):
                 return
         ##################################
 
-        if get_points(p1.display_name) > get_points(p2.display_name)
-            diff = get_points(p1.display_name) - get_points(p2.display_name)
-        elif:
-            diff = get_points(p2.display_name) - get_points(p1.display_name)
-            
-        if diff > 50:
-            ptsforgame = 5
-        if diff > 150:
-            ptsforgame = 3
-        
+
         #отправить сообщение о результате
         embed=discord.Embed(title="CIS Creative", description="Результаты боксфайта:")
         embed.set_thumbnail(url="https://media.discordapp.net/attachments/668037249056768020/668166034783600670/Logo_cis_customs.png?width=473&height=473")
-        embed.add_field(name="Победитель:", value=p1.name + " (+ "+ str(ptsforgame) +" )", inline=False)
-        embed.add_field(name="Проигравший:", value=p2.name + " (- "+ str(ptsforgame) +" )", inline=False)
+        embed.add_field(name="Победитель:", value=p1.name + " (+10)", inline=False)
+        embed.add_field(name="Проигравший:", value=p2.name + " (-10)", inline=False)
         await p2.send(embed=embed)
         await p1.send(embed=embed)
         #################################
 
         #изменить никнеймы
         try:
-            await p1.edit(nick='['+ str(get_points(p1.display_name) + ptsforgame) +'] ' + p1.name)
+            await p1.edit(nick='['+ str(get_points(p1.display_name) + 10) +'] ' + p1.name)
         except:
             print('cant change nick for p1')
 
 
         try:
-            await p2.edit(nick='['+ str(get_points(p2.display_name) - ptsforgame) +'] ' + p2.name)
+            await p2.edit(nick='['+ str(get_points(p2.display_name) - 10) +'] ' + p2.name)
         except:
             print('cant change nick for p2')
         #################################
-        
-        #выдача ролей
-
-        ##############
 
         fights.remove(p1)
         fights.remove(p2)
@@ -242,44 +229,29 @@ async def on_raw_reaction_add(payload):
             if reaction.count <= 2 and reaction.emoji == '💩':
                 return
         ##################################
-        if get_points(p1.display_name) > get_points(p2.display_name)
-            diff = get_points(p1.display_name) - get_points(p2.display_name)
-        elif:
-            diff = get_points(p2.display_name) - get_points(p1.display_name)
-            
-        if diff > 50:
-            ptsforgame = 5
-        if diff > 150:
-            ptsforgame = 3
-            
 
 
         #отправить сообщение о результате
         embed=discord.Embed(title="CIS Creative", description="Результаты боксфайта:")
         embed.set_thumbnail(url="https://media.discordapp.net/attachments/668037249056768020/668166034783600670/Logo_cis_customs.png?width=473&height=473")
-        embed.add_field(name="Победитель:", value=p2.name + " (+ "+ str(ptsforgame) +" )", inline=False)
-        embed.add_field(name="Проигравший:", value=p1.name + " (- "+ str(ptsforgame) +" )", inline=False)
+        embed.add_field(name="Победитель:", value=p2.name + " (+10)", inline=False)
+        embed.add_field(name="Проигравший:", value=p1.name + " (-10)", inline=False)
         await p2.send(embed=embed)
         await p1.send(embed=embed)
         #################################
 
         #изменить никнеймы
-        
         try:
-            await p1.edit(nick='['+ str(get_points(p1.display_name) - ptsforgame) +'] ' + p1.name)
+            await p1.edit(nick='['+ str(get_points(p1.display_name) - 10) +'] ' + p1.name)
         except:
             print('cant change nick for p1')
 
+
         try:
-            await p2.edit(nick='['+ str(get_points(p2.display_name) + ptsforgame) +'] ' + p2.name)
+            await p2.edit(nick='['+ str(get_points(p2.display_name) + 10) +'] ' + p2.name)
         except:
             print('cant change nick for p2')
         #################################
-        
-        
-        #выдача ролей
-
-        ##############
 
         fights.remove(p1)
         fights.remove(p2)
