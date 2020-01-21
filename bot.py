@@ -36,25 +36,13 @@ def check_points(member, guild):
     masterdiv = discord.utils.find(lambda r: r.id == 668153566766301186, guild.roles)
     championdiv = discord.utils.find(lambda r: r.id == 668153990994722832, guild.roles)
     if pts >= 10 and pts <= 59:
-        try:
-            await member.add_roles(opendiv)
-        except HTTPException:
-            print('HTTPException')
+        await member.add_roles(opendiv)
     if pts >= 60 and pts <= 99:
-        try:
-            await member.add_roles(contenderdiv)
-        except HTTPException:
-            print('HTTPException')
+        await member.add_roles(contender)
     if pts >= 100 and pts <= 199:
-        try:
-            await member.add_roles(masterdiv)
-        except HTTPException:
-            print('HTTPException')
+        await member.add_roles(masterdiv)
     if pts >= 200:
-        try:
-            await member.add_roles(championdiv)
-        except HTTPException:
-            print('HTTPException')
+        await member.add_roles(championdiv)
 
 def get_p1(s):
     l = len(s)
