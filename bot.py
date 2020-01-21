@@ -29,21 +29,6 @@ def get_points(s):
 
     return integ[0]
 
-def check_points(member, guild):
-    pts = get_points(member.display_name)
-    opendiv = discord.utils.find(lambda r: r.id == 668152509088399370, guild.roles)
-    contenderdiv = discord.utils.find(lambda r: r.id == 668152388959469596, guild.roles)
-    masterdiv = discord.utils.find(lambda r: r.id == 668153566766301186, guild.roles)
-    championdiv = discord.utils.find(lambda r: r.id == 668153990994722832, guild.roles)
-    if (pts >= 10) and (pts <= 59):
-        member.add_roles(opendiv)
-    elif (pts >= 60) and (pts <= 99):
-        member.add_roles(contender)
-    elif (pts >= 100) and (pts <= 199):
-        member.add_roles(masterdiv)
-    elif (pts >= 200):
-        member.add_roles(championdiv)
-
 def get_p1(s):
     l = len(s)
     integ = []
@@ -241,8 +226,7 @@ async def on_raw_reaction_add(payload):
         #################################
         
         #выдача ролей
-        check_points(p1, guild)
-        check_points(p2, guild)
+
         ##############
 
         fights.remove(p1)
@@ -294,8 +278,7 @@ async def on_raw_reaction_add(payload):
         
         
         #выдача ролей
-        check_points(p1, guild)
-        check_points(p2, guild)
+
         ##############
 
         fights.remove(p1)
