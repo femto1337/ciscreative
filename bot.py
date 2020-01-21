@@ -35,13 +35,13 @@ def check_points(member, guild):
     contenderdiv = discord.utils.find(lambda r: r.id == 668152388959469596, guild.roles)
     masterdiv = discord.utils.find(lambda r: r.id == 668153566766301186, guild.roles)
     championdiv = discord.utils.find(lambda r: r.id == 668153990994722832, guild.roles)
-    if pts >= 10 and pts <= 59:
+    if (pts >= 10) and (pts <= 59):
         await member.add_roles(opendiv)
-    elif pts >= 60 and pts <= 99:
+    elif (pts >= 60) and (pts <= 99):
         await member.add_roles(contender)
-    elif pts >= 100 and pts <= 199:
+    elif (pts >= 100) and (pts <= 199):
         await member.add_roles(masterdiv)
-    elif pts >= 200:
+    elif (pts >= 200):
         await member.add_roles(championdiv)
 
 def get_p1(s):
