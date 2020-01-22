@@ -214,7 +214,7 @@ async def on_raw_reaction_add(payload):
             await p2.edit(nick='['+ str(get_points(p2.display_name) - 10) +'] ' + p2.name)
         except:
             print('cant change nick for p2')
-        #################################
+        ##
 
         fights.remove(p1)
         fights.remove(p2)
