@@ -6,7 +6,7 @@ import json
 
 queue = []
 fights = []
-TOKEN = 'NjY4MDQwNzg4NDgyOTgxODk5.XiNqiw.BESeRIDSoBLGnfC7mweW40R6Sg4'
+TOKEN = '1'
 client = commands.Bot(command_prefix = '.')
 
 def get_points(s):
